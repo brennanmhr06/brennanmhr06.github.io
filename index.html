@@ -99,6 +99,65 @@
         <span>© <span id="year"></span> Brennan</span>
         <span>Built with my hands ofc</span>
       </footer>
+
+      <div class="projects-toggle">
+        <button class="dropdown-arrow" id="projectsToggle" aria-label="Toggle projects">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <section class="projects-section" id="projectsSection">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <a href="https://github.com/Guardians-Stuff/Guardian" class="project-card" target="_blank" rel="noopener noreferrer">
+            <div class="project-image-wrapper">
+              <img src="https://opengraph.githubassets.com/1/Guardians-Stuff/Guardian" alt="Guardian Discord Bot" class="project-image" />
+              <div class="project-overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-name">Guardian</span>
+            </div>
+          </a>
+          <a href="https://github.com/Guardians-Stuff/Dashboard" class="project-card" target="_blank" rel="noopener noreferrer">
+            <div class="project-image-wrapper">
+              <img src="https://opengraph.githubassets.com/1/Guardians-Stuff/Dashboard" alt="Guardian Dashboard" class="project-image" />
+              <div class="project-overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-name">Guardian Dashboard</span>
+            </div>
+          </a>
+          <a href="https://github.com/brennanmhr06/brennanmhr06.github.io" class="project-card" target="_blank" rel="noopener noreferrer">
+            <div class="project-image-wrapper">
+              <img src="https://opengraph.githubassets.com/1/brennanmhr06/brennanmhr06.github.io" alt="Portfolio Website" class="project-image" />
+              <div class="project-overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="project-name">Portfolio</span>
+            </div>
+          </a>
+        </div>
+      </section>
     </section>
   </main>
 
@@ -130,6 +189,17 @@
 
     window.addEventListener("mouseenter", () => {
       cursorDot.style.opacity = "1";
+    });
+
+    // Projects dropdown toggle
+    const projectsToggle = document.getElementById("projectsToggle");
+    const projectsSection = document.getElementById("projectsSection");
+    let isOpen = false;
+
+    projectsToggle.addEventListener("click", () => {
+      isOpen = !isOpen;
+      projectsSection.classList.toggle("open", isOpen);
+      projectsToggle.classList.toggle("open", isOpen);
     });
   </script>
 </body>
