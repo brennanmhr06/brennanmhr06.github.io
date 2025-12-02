@@ -69,6 +69,7 @@
       <div class="profile">
         <div class="avatar-wrapper">
           <img
+            id="discordAvatar"
             src="https://cdn.discordapp.com/embed/avatars/4.png"
             alt="Brennan's profile picture"
             class="avatar"
@@ -164,7 +165,6 @@
   <div class="cursor-dot"></div>
 
   <script>
-    // Hide loading screen when page is loaded
     window.addEventListener("load", () => {
       const loadingScreen = document.getElementById("loadingScreen");
       loadingScreen.style.opacity = "0";
@@ -191,7 +191,6 @@
       cursorDot.style.opacity = "1";
     });
 
-    // Projects dropdown toggle
     const projectsToggle = document.getElementById("projectsToggle");
     const projectsSection = document.getElementById("projectsSection");
     let isOpen = false;
@@ -201,7 +200,37 @@
       projectsSection.classList.toggle("open", isOpen);
       projectsToggle.classList.toggle("open", isOpen);
     });
+
+    (async () => {
+      const userId = '1421369024058490880';
+      const imgElem = document.getElementById('discordAvatar');
+      try {
+        const res = await fetch(`https://discord.com/api/users/${userId}`, {
+          headers: {
+          }
+        });
+
+        if (res.ok) {
+          const user = await res.json();
+          let url = '';
+          if (user.avatar) {
+            const isGif = user.avatar.startsWith('a_');
+            url = `https://cdn.discordapp.com/avatars/${userId}/${user.avatar}.${isGif ? 'gif' : 'png'}?size=512`;
+          } else {
+            let avatarIndex = 0;
+            if (user.discriminator) {
+              avatarIndex = parseInt(user.discriminator) % 5;
+            }
+            url = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
+          }
+          imgElem.src = url;
+        } else {
+          imgElem.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+        }
+      } catch (e) {
+        imgElem.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+      }
+    })();
   </script>
 </body>
 </html>
-
