@@ -2,235 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Brennan | Portfolio</title>
+  <title>Brennan | Cozy Card</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="loading-screen" id="loadingScreen">
-    <div class="loading-content">
-      <div class="loading-spinner"></div>
-      <p class="loading-text">Loading...</p>
-    </div>
-  </div>
-
-  <div class="background-gradient"></div>
-
-  <div class="space-layer">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-    <div class="orb orb-5"></div>
-    <div class="orb orb-6"></div>
-    <div class="orb orb-7"></div>
-  </div>
-
-  <div class="particles-layer">
-    <div class="particle particle-1"></div>
-    <div class="particle particle-2"></div>
-    <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-    <div class="particle particle-5"></div>
-    <div class="particle particle-6"></div>
-    <div class="particle particle-7"></div>
-    <div class="particle particle-8"></div>
-    <div class="particle particle-9"></div>
-    <div class="particle particle-10"></div>
-    <div class="particle particle-11"></div>
-    <div class="particle particle-12"></div>
-  </div>
-
-  <div class="shapes-layer">
-    <div class="shape shape-triangle shape-1"></div>
-    <div class="shape shape-triangle shape-2"></div>
-    <div class="shape shape-hexagon shape-3"></div>
-    <div class="shape shape-hexagon shape-4"></div>
-    <div class="shape shape-diamond shape-5"></div>
-    <div class="shape shape-diamond shape-6"></div>
-  </div>
-
-  <div class="grid-overlay"></div>
-
-  <div class="beams-layer">
-    <div class="beam beam-1"></div>
-    <div class="beam beam-2"></div>
-    <div class="beam beam-3"></div>
-  </div>
-
-  <main class="page">
-    <section class="card">
-      <div class="profile">
-        <div class="avatar-wrapper">
-          <img
-            id="discordAvatar"
-            src="https://cdn.discordapp.com/embed/avatars/4.png"
-            alt="Brennan's profile picture"
-            class="avatar"
-          />
-        </div>
-        <div class="profile-text">
-          <h1 class="name-with-badges">
-            Brennan
-            <span class="name-badges">
-              <span class="badge bubble badge-pronouns">He / Him</span>
-              <span class="badge bubble badge-bi">Bisexual</span>
-            </span>
-          </h1>
-        </div>
+  <div class="cozy-bg"></div>
+  <div class="cozy-center">
+    <section class="cozy-card">
+      <div class="cozy-avatar-block">
+        <img src="https://media.discordapp.net/attachments/1442949704240464015/1444529346608889866/a31c15132e8d13b1e1682c877b5fd51f.jpg?ex=6934f34a&is=6933a1ca&hm=54fb8ed1c6fc8e88a68bda27329dfd24b762ad400f669c881ab4977855f8a0b5&=&format=webp&width=922&height=922" class="cozy-avatar" alt="Brennan Profile Picture" loading="lazy" />
       </div>
-
-      <section class="bio">
+      <div class="cozy-profile-info">
+        <h1 class="cozy-name">
+          Brennan
+          <span class="cozy-badges">
+            <span class="cozy-badge">he/him</span>
+            <span class="cozy-badge cozy-badge-pink">gay</span>
+            <span class="cozy-badge cozy-badge-dev">dev</span>
+          </span>
+        </h1>
+        <span class="cozy-profile-desc" id="typewriter">
+          Full Stack Developer · Tech Enjoyer
+        </span>
+      </div>
+      <div class="cozy-section cozy-section-bio">
         <h2>About Me</h2>
-        <p>
-          Hey, I’m Brennan, a 19-year-old developer who spends most of his time either
-          deep in code or hanging out in video games. I love experimenting
-          with new tech, building things that feel smooth and satisfying to use, and
-          always having a new project or idea to tinker with.
+        <p style="text-align:center; font-size:1.07rem; margin: 0.8em 0 0; line-height:1.7;">
+          Just a dev who enjoys developing stuff DUHHH,<br>
+          i code in way too much languages.<br>
         </p>
-      </section>
-
-      <footer class="footer">
-        <span>© <span id="year"></span> Brennan</span>
-        <span>Built with my hands ofc</span>
-      </footer>
-
-      <div class="projects-toggle">
-        <button class="dropdown-arrow" id="projectsToggle" aria-label="Toggle projects">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
       </div>
-
-      <section class="projects-section" id="projectsSection">
-        <h2>Projects</h2>
-        <div class="projects-grid">
-          <a href="https://github.com/Guardians-Stuff/Guardian" class="project-card" target="_blank" rel="noopener noreferrer">
-            <div class="project-image-wrapper">
-              <img src="https://opengraph.githubassets.com/1/Guardians-Stuff/Guardian" alt="Guardian Discord Bot" class="project-image" />
-              <div class="project-overlay">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </div>
-            </div>
-            <div class="project-info">
-              <span class="project-name">Guardian</span>
-            </div>
-          </a>
-          <a href="https://github.com/Guardians-Stuff/Dashboard" class="project-card" target="_blank" rel="noopener noreferrer">
-            <div class="project-image-wrapper">
-              <img src="https://opengraph.githubassets.com/1/Guardians-Stuff/Dashboard" alt="Guardian Dashboard" class="project-image" />
-              <div class="project-overlay">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </div>
-            </div>
-            <div class="project-info">
-              <span class="project-name">Guardian Dashboard</span>
+      <div class="cozy-section">
+        <h2>Skills</h2>
+        <ul class="cozy-chips">
+          <li>JavaScript</li>
+          <li>TypeScript</li>
+          <li>Svelte</li>
+          <li>React</li>
+          <li>CSS</li>
+          <li>Node.js</li>
+          <li>Python</li>
+          <li>Discord.js</li>
+        </ul>
+      </div>
+      <div class="cozy-section">
+        <h2>My Projects</h2>
+        <div class="cozy-projects">
+          <a href="https://github.com/Guardians-Stuff/Guardian" class="cozy-project" target="_blank">
+            <div class="cozy-project-thumb" style="background-image:url('https://opengraph.githubassets.com/1/Guardians-Stuff/Guardian')"></div>
+            <div>
+              <strong>Guardian</strong>
+              <small>AI mod bot for Discord</small>
             </div>
           </a>
-          <a href="https://github.com/brennanmhr06/brennanmhr06.github.io" class="project-card" target="_blank" rel="noopener noreferrer">
-            <div class="project-image-wrapper">
-              <img src="https://opengraph.githubassets.com/1/brennanmhr06/brennanmhr06.github.io" alt="Portfolio Website" class="project-image" />
-              <div class="project-overlay">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </div>
+          <a href="https://github.com/Guardians-Stuff/Dashboard" class="cozy-project" target="_blank">
+            <div class="cozy-project-thumb" style="background-image:url('https://opengraph.githubassets.com/1/Guardians-Stuff/Dashboard')"></div>
+            <div>
+              <strong>Guardian Dashboard</strong>
+              <small>React web dashboard</small>
             </div>
-            <div class="project-info">
-              <span class="project-name">Portfolio</span>
+          </a>
+          <a href="https://github.com/brennanmhr06/brennanmhr06.github.io" class="cozy-project" target="_blank">
+            <div class="cozy-project-thumb" style="background-image:url('https://opengraph.githubassets.com/1/brennanmhr06/brennanmhr06.github.io')"></div>
+            <div>
+              <strong>This Portfolio</strong>
+              <small>Built with my hands and tears and blood and sweat</small>
             </div>
           </a>
         </div>
-      </section>
+      </div>
+      <footer class="cozy-footer">
+        <span>© <span id="year"></span> Brennan</span>
+        <span>Weed in hand, code in heart</span>
+      </footer>
     </section>
-  </main>
-
-  <div class="cursor-dot"></div>
-
+  </div>
   <script>
-    window.addEventListener("load", () => {
-      const loadingScreen = document.getElementById("loadingScreen");
-      loadingScreen.style.opacity = "0";
-      setTimeout(() => {
-        loadingScreen.style.display = "none";
-      }, 500);
-    });
-
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    const cursorDot = document.querySelector(".cursor-dot");
+    const phrases = [
+      "Full Stack Developer · Tech Enjoyer",
+      "Building projects as you view this website",
+      "Yk, im like gay, right?",
+    ];
+    const target = document.getElementById("typewriter");
+    let pi = 0, ci = 0, del = false;
 
-    window.addEventListener("mousemove", (event) => {
-      const { clientX, clientY } = event;
-      cursorDot.style.left = `${clientX}px`;
-      cursorDot.style.top = `${clientY}px`;
-    });
-
-    window.addEventListener("mouseleave", () => {
-      cursorDot.style.opacity = "0";
-    });
-
-    window.addEventListener("mouseenter", () => {
-      cursorDot.style.opacity = "1";
-    });
-
-    const projectsToggle = document.getElementById("projectsToggle");
-    const projectsSection = document.getElementById("projectsSection");
-    let isOpen = false;
-
-    projectsToggle.addEventListener("click", () => {
-      isOpen = !isOpen;
-      projectsSection.classList.toggle("open", isOpen);
-      projectsToggle.classList.toggle("open", isOpen);
-    });
-
-    (async () => {
-      const userId = '1421369024058490880';
-      const imgElem = document.getElementById('discordAvatar');
-      try {
-        const res = await fetch(`https://discord.com/api/users/${userId}`, {
-          headers: {
-          }
-        });
-
-        if (res.ok) {
-          const user = await res.json();
-          let url = '';
-          if (user.avatar) {
-            const isGif = user.avatar.startsWith('a_');
-            url = `https://cdn.discordapp.com/avatars/${userId}/${user.avatar}.${isGif ? 'gif' : 'png'}?size=512`;
-          } else {
-            let avatarIndex = 0;
-            if (user.discriminator) {
-              avatarIndex = parseInt(user.discriminator) % 5;
-            }
-            url = `https://cdn.discordapp.com/embed/avatars/${avatarIndex}.png`;
-          }
-          imgElem.src = url;
-        } else {
-          imgElem.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+    function typeLoop() {
+      if (!target) return;
+      const current = phrases[pi];
+      if (!del) {
+        ci++;
+        target.textContent = current.slice(0, ci);
+        if (ci === current.length) {
+          setTimeout(() => { del = true; typeLoop(); }, 1500);
+          return;
         }
-      } catch (e) {
-        imgElem.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+      } else {
+        ci--;
+        target.textContent = current.slice(0, ci);
+        if (ci === 0) {
+          del = false;
+          pi = (pi + 1) % phrases.length;
+        }
       }
-    })();
+      setTimeout(typeLoop, del ? 32 : 70);
+    }
+    setTimeout(typeLoop, 1040);
   </script>
 </body>
 </html>
