@@ -15,6 +15,31 @@
   --transition-fast: 170ms cubic-bezier(0.4, 0, 0.2, 1);
   --badge-glow: 0 0 2.5px #fafafa, 0 0 5px #aaa8f3;
   --gay-darker-white: #e6ebfc;
+  --scrollbarBG: #202440;
+  --scrollbarThumb: #f5f6fa;
+  --scrollbarThumbBorder: #7c3aed;
+}
+
+body, html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbarThumb) var(--scrollbarBG);
+}
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  width: 11px;
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb {
+  background: var(--scrollbarThumb);
+  border-radius: 8px;
+  border: 2.5px solid var(--scrollbarBG);
+  box-shadow: 0 0 4px var(--accent-soft);
+}
+body::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  border-color: var(--accent-strong);
 }
 
 *,
@@ -30,7 +55,6 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
   -webkit-font-smoothing: antialiased;
-  cursor: auto;
   transition: background 0.4s;
 }
 
@@ -159,7 +183,6 @@ body {
   box-shadow: 0 0 11px rgba(22,28,43, 0.46);
 }
 
-/* Make the gay badge use the rainbow flag colors and increase word readability */
 .cozy-badge-pink {
   background: linear-gradient(
     180deg,
@@ -300,48 +323,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.cursor-dot {
-  display: block !important;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow:
-    0 0 14px rgba(255,255,255,0.52),
-    0 0 24px rgba(129,140,248,0.7);
-  transform: translate(-50%,-50%);
-  pointer-events: none;
-  z-index: 2147483647;
-  transition: transform 80ms cubic-bezier(0.4,0,0.2,1), opacity 120ms cubic-bezier(0.4,0,0.2,1);
-  animation: cursor-pulse 1.5s ease-in-out infinite;
-  opacity: 1;
-  visibility: visible;
-}
-
-@keyframes cursor-pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow:
-      0 0 11px rgba(255,255,255,0.70),
-      0 0 19px rgba(129,140,248,0.74);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.13);
-    box-shadow:
-      0 0 17px rgba(255,255,255,0.93),
-      0 0 27px rgba(129,140,248,1);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow:
-      0 0 11px rgba(255,255,255,0.70),
-      0 0 19px rgba(129,140,248,0.74);
-  }
 }
 
 @media (max-width: 720px) {
