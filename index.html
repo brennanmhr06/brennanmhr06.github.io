@@ -5,6 +5,7 @@
   <title>Brennan | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="projects.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -73,30 +74,9 @@
           <li>AWS</li>
         </ul>
       </div>
-      <div class="cozy-section">
-        <h2>My Projects</h2>
-        <div class="cozy-projects">
-          <a href="https://github.com/Guardians-Stuff/Guardian" class="cozy-project" target="_blank">
-            <div class="cozy-project-thumb" style="background-image:url('https://opengraph.githubassets.com/1/Guardians-Stuff/Guardian')"></div>
-            <div>
-              <strong>Guardian</strong>
-              <small>AI mod bot for Discord</small>
-            </div>
-          </a>
-          <a href="https://github.com/Guardians-Stuff/Dashboard" class="cozy-project" target="_blank">
-            <div class="cozy-project-thumb" style="background-image:url('https://opengraph.githubassets.com/1/Guardians-Stuff/Dashboard')"></div>
-            <div>
-              <strong>Guardian Dashboard</strong>
-              <small>React web dashboard</small>
-            </div>
-          </a>
-          <a href="https://github.com/brennanmhr06/brennanmhr06.github.io" class="cozy-project" target="_blank">
-            <div class="cozy-project-thumb" style="background-image:url('https://opengraph.githubassets.com/1/brennanmhr06/brennanmhr06.github.io')"></div>
-            <div>
-              <strong>This Portfolio</strong>
-              <small>Built with my hands and tears and blood and sweat</small>
-            </div>
-          </a>
+      <div class="cozy-section cozy-section-projects">
+        <h2>Projects</h2>
+        <div id="projects-list">
         </div>
       </div>
       <footer class="cozy-footer">
@@ -105,40 +85,6 @@
       </footer>
     </section>
   </div>
-  <script>
-    // Year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Typewriter
-    const phrases = [
-      "Full Stack Developer · Tech Enjoyer",
-      "Building projects as you view this website",
-      "Yk, im like gay, right?",
-    ];
-    const target = document.getElementById("typewriter");
-    let pi = 0, ci = 0, del = false;
-
-    function typeLoop() {
-      if (!target) return;
-      const current = phrases[pi];
-      if (!del) {
-        ci++;
-        target.textContent = current.slice(0, ci);
-        if (ci === current.length) {
-          setTimeout(() => { del = true; typeLoop(); }, 1500);
-          return;
-        }
-      } else {
-        ci--;
-        target.textContent = current.slice(0, ci);
-        if (ci === 0) {
-          del = false;
-          pi = (pi + 1) % phrases.length;
-        }
-      }
-      setTimeout(typeLoop, del ? 32 : 70);
-    }
-    setTimeout(typeLoop, 1040);
-  </script>
+  <script src="server.js"></script>
 </body>
 </html>
