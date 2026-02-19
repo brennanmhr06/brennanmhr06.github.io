@@ -75,24 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const displayRepos = publicRepos.slice(0, 12);
       const html = `
-        <ul class="cozy-projects-list">
-          ${displayRepos.map(repo => `
-            <li class="cozy-project-card">
+        <ul class="projects-grid">
+          ${displayRepos.map((repo, i) => `
+            <li class="project-card" style="animation-delay: ${i * 0.05}s">
               <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
-                <div class="project-thumb">
-                  <img src="https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}" alt="${repo.name}" loading="lazy">
+                <div class="project-card__thumb">
+                  <img src="https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}" alt="" loading="lazy">
                 </div>
-                <div class="project-content">
-                  <div class="project-header">
-                    <span>${repo.name}</span>
-                  </div>
-                  <div class="project-desc">
-                    ${repo.description ? repo.description.replace(/</g,"&lt;").replace(/>/g,"&gt;") : "<em>No description</em>"}
-                  </div>
-                  <div class="project-meta">
+                <div class="project-card__body">
+                  <h3 class="project-card__title">${repo.name}</h3>
+                  <p class="project-card__desc">${repo.description ? repo.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : "No description"}</p>
+                  <div class="project-card__meta">
                     ${repo.language ? `<span>${repo.language}</span>` : ""}
-                    ${repo.stargazers_count ? `<span>⭐ ${repo.stargazers_count}</span>` : ""}
-                    <span>Updated ${new Date(repo.pushed_at).toLocaleDateString()}</span>
+                    ${repo.stargazers_count ? `<span>★ ${repo.stargazers_count}</span>` : ""}
+                    <span>${new Date(repo.pushed_at).toLocaleDateString()}</span>
                   </div>
                 </div>
               </a>
