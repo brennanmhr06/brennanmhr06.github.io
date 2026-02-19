@@ -43,6 +43,10 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="white" opacity="0.9"/></svg>')
+      10 10,
+    auto;
 }
 
 /* Subtle noise overlay */
@@ -127,6 +131,32 @@ body {
 .nav__links a:focus-visible {
   color: var(--accent);
 }
+
+/* Custom cursor for interactive elements */
+a,
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="4" fill="white" opacity="1"/></svg>')
+      10 10,
+    pointer;
+}
+
+/* Prevent text cursor on typewriter element */
+#typewriter {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="3" fill="white" opacity="0.9"/></svg>')
+      10 10,
+    auto;
+}
+
 .nav__links a::after {
   content: "";
   position: absolute;
@@ -191,13 +221,19 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--border-strong);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 24px 48px -12px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 24px 48px -12px rgba(0, 0, 0, 0.5);
   margin-bottom: 1.5rem;
-  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  transition:
+    border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
 }
 .hero__avatar:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent-soft), 0 24px 48px -12px rgba(34, 211, 238, 0.2);
+  box-shadow:
+    0 0 0 1px var(--accent-soft),
+    0 24px 48px -12px rgba(34, 211, 238, 0.2);
 }
 
 .hero__name {
@@ -270,13 +306,24 @@ body {
 }
 
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.5; transform: scaleY(0.8); }
-  50% { opacity: 1; transform: scaleY(1); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scaleY(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ----- Sections ----- */
@@ -287,22 +334,25 @@ body {
 }
 
 .section__inner {
-  animation: sectionIn 0.8s var(--ease-out) both;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s var(--ease-out);
 }
 
-.section:nth-child(2) .section__inner { animation-delay: 0.05s; }
-.section:nth-child(3) .section__inner { animation-delay: 0.1s; }
-.section:nth-child(4) .section__inner { animation-delay: 0.15s; }
+.section__inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-@keyframes sectionIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Staggered animation delays */
+.section:nth-child(2) .section__inner.visible {
+  transition-delay: 0.1s;
+}
+.section:nth-child(3) .section__inner.visible {
+  transition-delay: 0.2s;
+}
+.section:nth-child(4) .section__inner.visible {
+  transition-delay: 0.3s;
 }
 
 .section__title {
@@ -344,7 +394,10 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
-  transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    background 0.2s var(--ease);
 }
 .chips li:hover {
   color: var(--accent);
@@ -371,14 +424,17 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+  transition: all 0.3s var(--ease-out);
   animation: cardIn 0.5s var(--ease-out) both;
 }
+
 .project-card:hover,
 .project-card:focus-within {
-  border-color: var(--border-strong);
-  box-shadow: 0 16px 48px -16px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--accent-soft);
-  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow:
+    0 20px 60px -20px rgba(34, 211, 238, 0.3),
+    0 0 0 1px var(--accent-soft);
+  transform: translateY(-8px) scale(1.02);
 }
 
 .project-card a {
@@ -412,7 +468,11 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
   pointer-events: none;
 }
 
@@ -534,7 +594,9 @@ button:focus-visible {
   text-decoration: none;
   border-radius: var(--radius);
   border: 1px solid rgba(34, 211, 238, 0.3);
-  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease);
 }
 .btn:hover {
   background: var(--accent);

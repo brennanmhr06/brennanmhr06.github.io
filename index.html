@@ -1,125 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Brennan | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Brennan — Full Stack Developer. Building stuff across the stack." />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-</head>
-<body>
-  <div class="noise" aria-hidden="true"></div>
-  <a href="#main" class="skip-link">Skip to content</a>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Brennan | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Brennan — Full Stack Developer. Building stuff across the stack."
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Main">
-      <a href="#" class="nav__brand">Brennan</a>
-      <div class="nav__links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-      </div>
-    </nav>
-  </header>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main">
+        <a href="#" class="nav__brand">Brennan</a>
+        <div class="nav__links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+        </div>
+      </nav>
+    </header>
 
-  <main id="main" class="main">
-    <section class="hero">
-      <div class="hero__inner">
-        <img
-          id="profile-avatar"
-          src="https://github.com/brennanmhr06.png"
-          class="hero__avatar"
-          alt="Brennan"
-          width="160"
-          height="160"
-          loading="eager"
-        />
-        <h1 class="hero__name">
-          Brennan
-          <span class="hero__badges">
-            <span class="badge badge--pronouns">he/him</span>
-            <span class="badge badge--pink">gay</span>
-            <span class="badge badge--dev">dev</span>
-          </span>
-        </h1>
-        <p class="hero__tagline" id="typewriter" aria-live="polite">
-          Full Stack Developer · Tech Enjoyer
-        </p>
-      </div>
-      <div class="hero__scroll" aria-hidden="true">
-        <span>Scroll</span>
-        <div class="hero__scroll-line"></div>
-      </div>
-    </section>
+    <main id="main" class="main">
+      <section class="hero">
+        <div class="hero__inner">
+          <img
+            id="profile-avatar"
+            src="https://github.com/brennanmhr06.png"
+            class="hero__avatar"
+            alt="Brennan"
+            width="160"
+            height="160"
+            loading="eager"
+          />
+          <h1 class="hero__name">
+            Brennan
+            <span class="hero__badges">
+              <span class="badge badge--pronouns">he/him</span>
+              <span class="badge badge--pink">gay</span>
+              <span class="badge badge--dev">dev</span>
+            </span>
+          </h1>
+          <p class="hero__tagline" id="typewriter" aria-live="polite">
+            Full Stack Developer · Tech Enjoyer
+          </p>
+        </div>
+        <div class="hero__scroll" aria-hidden="true">
+          <span>Scroll</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </section>
 
-    <section id="about" class="section section--about">
-      <div class="section__inner">
-        <h2 class="section__title">About Me</h2>
-        <p class="section__text section__text--center">
-          Just a dev who enjoys developing stuff DUHHH,<br />
-          I code in way too many languages.
-        </p>
-      </div>
-    </section>
+      <section id="about" class="section section--about">
+        <div class="section__inner">
+          <h2 class="section__title">About Me</h2>
+          <p class="section__text section__text--center">
+            Just a dev who enjoys developing stuff DUHHH,<br />
+            I code in way too many languages.
+          </p>
+        </div>
+      </section>
 
-    <section id="skills" class="section section--skills">
-      <div class="section__inner">
-        <h2 class="section__title">Skills</h2>
-        <ul class="chips" id="skills-list">
-          <li>JavaScript</li>
-          <li>TypeScript</li>
-          <li>Svelte</li>
-          <li>React</li>
-          <li>Next.js</li>
-          <li>CSS</li>
-          <li>SCSS/Sass</li>
-          <li>Node.js</li>
-          <li>Express.js</li>
-          <li>Python</li>
-          <li>FastAPI</li>
-          <li>Django</li>
-          <li>Rust</li>
-          <li>Elixir</li>
-          <li>Phoenix</li>
-          <li>Go</li>
-          <li>C</li>
-          <li>C++</li>
-          <li>Lua</li>
-          <li>Shell</li>
-          <li>HTML</li>
-          <li>PHP</li>
-          <li>Laravel</li>
-          <li>SQL</li>
-          <li>PostgreSQL</li>
-          <li>MongoDB</li>
-          <li>GraphQL</li>
-          <li>Docker</li>
-          <li>Git</li>
-          <li>CI/CD</li>
-          <li>Linux</li>
-          <li>AWS</li>
-        </ul>
-      </div>
-    </section>
+      <section id="skills" class="section section--skills">
+        <div class="section__inner">
+          <h2 class="section__title">Skills</h2>
+          <ul class="chips" id="skills-list">
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>Svelte</li>
+            <li>React</li>
+            <li>Next.js</li>
+            <li>CSS</li>
+            <li>SCSS/Sass</li>
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>Python</li>
+            <li>FastAPI</li>
+            <li>Django</li>
+            <li>Rust</li>
+            <li>Elixir</li>
+            <li>Phoenix</li>
+            <li>Go</li>
+            <li>C</li>
+            <li>C++</li>
+            <li>Lua</li>
+            <li>Shell</li>
+            <li>HTML</li>
+            <li>PHP</li>
+            <li>Laravel</li>
+            <li>SQL</li>
+            <li>PostgreSQL</li>
+            <li>MongoDB</li>
+            <li>GraphQL</li>
+            <li>Docker</li>
+            <li>Git</li>
+            <li>CI/CD</li>
+            <li>Linux</li>
+            <li>AWS</li>
+          </ul>
+        </div>
+      </section>
 
-    <section id="projects" class="section section--projects">
-      <div class="section__inner">
-        <h2 class="section__title">Projects</h2>
-        <div id="projects-list" class="projects-wrap"></div>
-      </div>
-    </section>
+      <section id="projects" class="section section--projects">
+        <div class="section__inner">
+          <h2 class="section__title">Projects</h2>
+          <div id="projects-list" class="projects-wrap"></div>
+        </div>
+      </section>
 
-    <footer class="site-footer">
-      <div class="site-footer__inner">
-        <p class="site-footer__copy">© <span id="year"></span> Brennan</p>
-        <p class="site-footer__tagline">Weed in hand, code in heart</p>
-      </div>
-    </footer>
-  </main>
+      <footer class="site-footer">
+        <div class="site-footer__inner">
+          <p class="site-footer__copy">© <span id="year"></span> Brennan</p>
+          <p class="site-footer__tagline">Weed in hand, code in heart</p>
+        </div>
+      </footer>
+    </main>
 
-  <script src="server.js"></script>
-</body>
+    <script src="server.js"></script>
+  </body>
 </html>

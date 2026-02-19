@@ -1,17 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const yearEl = document.getElementById('year');
+document.addEventListener("DOMContentLoaded", () => {
+  const yearEl = document.getElementById("year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  const typewriterEl = document.getElementById('typewriter');
+  // Smooth scroll animations with Intersection Observer
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, observerOptions);
+
+  // Observe all section inner elements
+  const sectionInners = document.querySelectorAll(".section__inner");
+  sectionInners.forEach((inner) => {
+    observer.observe(inner);
+  });
+
+  const typewriterEl = document.getElementById("typewriter");
   if (typewriterEl) {
     const typewriterPhrases = [
       "Full Stack Developer · Tech Enjoyer",
       "Plant & Animal Lover · Full-Stack Dev",
-      "Always building something new or fixing something old"
+      "Always building something new or fixing something old",
     ];
-    let phraseIndex = 0, charIndex = 0, typing = true;
+    let phraseIndex = 0,
+      charIndex = 0,
+      typing = true;
     function type() {
       const phrase = typewriterPhrases[phraseIndex];
       if (typing) {
@@ -41,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadProjects() {
     const user = "brennanmhr06";
     const orgs = ["fluent-lang-apps", "Guardians-Stuff"];
-    const projectsList = document.getElementById('projects-list');
+    const projectsList = document.getElementById("projects-list");
     if (!projectsList) return;
     projectsList.textContent = "Loading...";
     const fetchRepos = async (url) => {
@@ -59,15 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     try {
       const [userRepos, ...orgReposArr] = await Promise.all([
-        fetchRepos(`https://api.github.com/users/${user}/repos?per_page=100&type=public`),
-        ...orgs.map(org => fetchRepos(`https://api.github.com/orgs/${org}/repos?per_page=100&type=public`))
+        fetchRepos(
+          `https://api.github.com/users/${user}/repos?per_page=100&type=public`,
+        ),
+        ...orgs.map((org) =>
+          fetchRepos(
+            `https://api.github.com/orgs/${org}/repos?per_page=100&type=public`,
+          ),
+        ),
       ]);
       const allRepos = uniqueBy(
         [...(userRepos || []), ...orgReposArr.flat()],
-        "full_name"
+        "full_name",
       );
       const publicRepos = allRepos
-        .filter(repo => !repo.fork && !repo.archived)
+        .filter((repo) => !repo.fork && !repo.archived)
         .sort((a, b) => b.stargazers_count - a.stargazers_count);
       if (publicRepos.length === 0) {
         projectsList.innerHTML = "<p>No public projects found.</p>";
@@ -76,7 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const displayRepos = publicRepos.slice(0, 12);
       const html = `
         <ul class="projects-grid">
-          ${displayRepos.map((repo, i) => `
+          ${displayRepos
+            .map(
+              (repo, i) => `
             <li class="project-card" style="animation-delay: ${i * 0.05}s">
               <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
                 <div class="project-card__thumb">
@@ -93,7 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </a>
             </li>
-          `).join("")}
+          `,
+            )
+            .join("")}
         </ul>
       `;
       projectsList.innerHTML = html;
