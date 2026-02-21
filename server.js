@@ -4,6 +4,25 @@ document.addEventListener("DOMContentLoaded", () => {
     yearEl.textContent = new Date().getFullYear();
   }
 
+  // Create floating particles
+  function createParticles() {
+    const particlesContainer = document.getElementById("particles");
+    if (!particlesContainer) return;
+
+    const particleCount = 30;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement("div");
+      particle.className = "particle";
+      particle.style.left = Math.random() * 100 + "%";
+      particle.style.animationDelay = Math.random() * 20 + "s";
+      particle.style.animationDuration = 15 + Math.random() * 10 + "s";
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  createParticles();
+
   // Smooth scroll animations with Intersection Observer
   const observerOptions = {
     threshold: 0.1,
