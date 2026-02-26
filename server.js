@@ -4,35 +4,51 @@ document.addEventListener("DOMContentLoaded", () => {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // Create floating particles
+  // Enhanced floating particles with varied effects
   function createParticles() {
     const particlesContainer = document.getElementById("particles");
     if (!particlesContainer) return;
 
-    const particleCount = 30;
+    const particleCount = 60;
+    const particleTypes = [
+      'particle--small', 'particle--medium', 'particle--large',
+      'particle--glow', 'particle--pulse', 'particle--cyan', 'particle--purple'
+    ];
 
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement("div");
-      particle.className = "particle";
+      const randomType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+      particle.className = `particle ${randomType}`;
       particle.style.left = Math.random() * 100 + "%";
-      particle.style.animationDelay = Math.random() * 20 + "s";
-      particle.style.animationDuration = 15 + Math.random() * 10 + "s";
+      particle.style.animationDelay = Math.random() * 25 + "s";
+      particle.style.animationDuration = (12 + Math.random() * 15) + "s";
+
       particlesContainer.appendChild(particle);
     }
   }
 
   createParticles();
 
-  // Smooth scroll animations with Intersection Observer
+  // Advanced scroll animations with enhanced Intersection Observer
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
+    threshold: [0.1, 0.3, 0.6],
+    rootMargin: "0px 0px -100px 0px",
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
+        const ratio = entry.intersectionRatio;
         entry.target.classList.add("visible");
+        entry.target.style.setProperty('--scroll-ratio', ratio);
+
+        // Add staggered animation for child elements
+        const children = entry.target.querySelectorAll('.chips li, .project-card');
+        children.forEach((child, index) => {
+          setTimeout(() => {
+            child.classList.add('animate-in');
+          }, index * 100);
+        });
       }
     });
   }, observerOptions);
@@ -43,53 +59,75 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(inner);
   });
 
+  // Enhanced typewriter effect with more phrases and better timing
   const typewriterEl = document.getElementById("typewriter");
   if (typewriterEl) {
     const typewriterPhrases = [
       "Full Stack Developer · Tech Enjoyer",
       "Plant & Animal Lover · Full-Stack Dev",
-      "Always building something new or fixing something old",
     ];
-    let phraseIndex = 0,
-      charIndex = 0,
-      typing = true;
+
+    let phraseIndex = 0, charIndex = 0, typing = true;
+    let cursorVisible = true;
+
+    // Cursor blink effect
+    setInterval(() => {
+      cursorVisible = !cursorVisible;
+      typewriterEl.style.borderRight = cursorVisible ? '2px solid var(--accent)' : '2px solid transparent';
+    }, 500);
+
     function type() {
       const phrase = typewriterPhrases[phraseIndex];
       if (typing) {
         if (charIndex < phrase.length) {
           typewriterEl.textContent = phrase.slice(0, charIndex + 1);
           charIndex++;
-          setTimeout(type, 55);
+          setTimeout(type, 50 + Math.random() * 30);
         } else {
           typing = false;
-          setTimeout(type, 1200);
+          setTimeout(type, 2000 + Math.random() * 1000);
         }
       } else {
         if (charIndex > 0) {
           typewriterEl.textContent = phrase.slice(0, charIndex - 1);
           charIndex--;
-          setTimeout(type, 30);
+          setTimeout(type, 25 + Math.random() * 15);
         } else {
           typing = true;
           phraseIndex = (phraseIndex + 1) % typewriterPhrases.length;
-          setTimeout(type, 600);
+          setTimeout(type, 500);
         }
       }
     }
-    type();
+
+    // Start typewriter with delay
+    setTimeout(() => {
+      typewriterEl.style.borderRight = '2px solid var(--accent)';
+      type();
+    }, 1000);
   }
 
+  // Enhanced project loading with staggered animations
   async function loadProjects() {
     const user = "brennanmhr06";
     const orgs = ["fluent-lang-apps", "Guardians-Stuff"];
     const projectsList = document.getElementById("projects-list");
     if (!projectsList) return;
-    projectsList.textContent = "Loading...";
+
+    // Enhanced loading state
+    projectsList.innerHTML = `
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading amazing projects...</p>
+      </div>
+    `;
+
     const fetchRepos = async (url) => {
       const response = await fetch(url);
       if (!response.ok) return [];
       return response.json();
     };
+
     function uniqueBy(repos, key) {
       const seen = new Set();
       return repos.filter((repo) => {
@@ -98,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
       });
     }
+
     try {
       const [userRepos, ...orgReposArr] = await Promise.all([
         fetchRepos(
@@ -109,49 +148,199 @@ document.addEventListener("DOMContentLoaded", () => {
           ),
         ),
       ]);
+
       const allRepos = uniqueBy(
         [...(userRepos || []), ...orgReposArr.flat()],
         "full_name",
       );
+
       const publicRepos = allRepos
         .filter((repo) => !repo.fork && !repo.archived)
         .sort((a, b) => b.stargazers_count - a.stargazers_count);
+
       if (publicRepos.length === 0) {
         projectsList.innerHTML = "<p>No public projects found.</p>";
         return;
       }
+
       const displayRepos = publicRepos.slice(0, 12);
       const html = `
         <ul class="projects-grid">
           ${displayRepos
-            .map(
-              (repo, i) => `
-            <li class="project-card" style="animation-delay: ${i * 0.05}s">
+          .map(
+            (repo, i) => `
+            <li class="project-card" style="animation-delay: ${i * 0.1}s">
               <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
                 <div class="project-card__thumb">
                   <img src="https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}" alt="" loading="lazy">
+                  <div class="project-card__overlay">
+                    <div class="project-card__stars">★ ${repo.stargazers_count}</div>
+                  </div>
                 </div>
                 <div class="project-card__body">
                   <h3 class="project-card__title">${repo.name}</h3>
                   <p class="project-card__desc">${repo.description ? repo.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : "No description"}</p>
                   <div class="project-card__meta">
-                    ${repo.language ? `<span>${repo.language}</span>` : ""}
-                    ${repo.stargazers_count ? `<span>★ ${repo.stargazers_count}</span>` : ""}
-                    <span>${new Date(repo.pushed_at).toLocaleDateString()}</span>
+                    ${repo.language ? `<span class="tech-tag">${repo.language}</span>` : ""}
+                    <span class="date-tag">${new Date(repo.pushed_at).toLocaleDateString()}</span>
                   </div>
                 </div>
               </a>
             </li>
           `,
-            )
-            .join("")}
+          )
+          .join("")}
         </ul>
       `;
+
       projectsList.innerHTML = html;
+
+      // Re-trigger animations for newly loaded projects
+      setTimeout(() => {
+        const cards = projectsList.querySelectorAll('.project-card');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('animate-in');
+          }, index * 100);
+        });
+      }, 100);
+
     } catch {
       projectsList.innerHTML = "<p>Failed to load projects from GitHub.</p>";
     }
   }
 
   loadProjects();
+
+  // Magnetic cursor effect
+  function initMagneticCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'magnetic-cursor';
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'magnetic-cursor-dot';
+
+    document.body.appendChild(cursor);
+    document.body.appendChild(cursorDot);
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let cursorDotX = 0, cursorDotY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      const cursorSpeed = 0.1;
+      const dotSpeed = 0.3;
+
+      cursorX += (mouseX - cursorX) * cursorSpeed;
+      cursorY += (mouseY - cursorY) * cursorSpeed;
+
+      cursorDotX += (mouseX - cursorDotX) * dotSpeed;
+      cursorDotY += (mouseY - cursorDotY) * dotSpeed;
+
+      cursor.style.transform = `translate(${cursorX - 10}px, ${cursorY - 10}px)`;
+      cursorDot.style.transform = `translate(${cursorDotX - 2}px, ${cursorDotY - 2}px)`;
+
+      requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+
+    // Magnetic effect on interactive elements
+    const magneticElements = document.querySelectorAll('.nav__links a, .badge, .chips li, .project-card');
+
+    magneticElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        cursor.style.transform += ' scale(1.5)';
+        cursorDot.style.transform += ' scale(0.5)';
+      });
+
+      element.addEventListener('mouseleave', () => {
+        cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
+        cursorDot.style.transform = cursorDot.style.transform.replace(' scale(0.5)', '');
+      });
+    });
+  }
+
+  // Initialize magnetic cursor on desktop only
+  if (window.innerWidth > 768) {
+    initMagneticCursor();
+  }
+
+  // Add smooth scroll behavior for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Enhanced parallax scrolling effect
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.hero::before, .grid-overlay, .bg-gradient');
+
+    parallaxElements.forEach(element => {
+      const speed = element.classList.contains('hero::before') ? 0.5 : 0.2;
+      const yPos = -(scrolled * speed);
+      element.style.transform = `translateY(${yPos}px)`;
+    });
+  });
+
+  // Add parallax effect on scroll
+  let ticking = false;
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.hero__avatar, .hero__name');
+
+    parallaxElements.forEach((element, index) => {
+      const speed = 0.5 + (index * 0.2);
+      const yPos = -(scrolled * speed);
+      element.style.transform = `translateY(${yPos}px)`;
+    });
+
+    ticking = false;
+  }
+
+  function requestTick() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestTick);
+
+  // Add mouse move effect for hero section
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.addEventListener('mousemove', (e) => {
+      const { clientX, clientY } = e;
+      const { left, top, width, height } = hero.getBoundingClientRect();
+
+      const x = (clientX - left) / width - 0.5;
+      const y = (clientY - top) / height - 0.5;
+
+      const avatar = hero.querySelector('.hero__avatar');
+      if (avatar) {
+        avatar.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
+      }
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      const avatar = hero.querySelector('.hero__avatar');
+      if (avatar) {
+        avatar.style.transform = 'translate(0, 0) scale(1)';
+      }
+    });
+  }
 });
