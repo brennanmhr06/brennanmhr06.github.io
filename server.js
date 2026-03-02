@@ -107,18 +107,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
 
-  // Enhanced project loading with staggered animations
+  // Enhanced project loading with skeleton cards
   async function loadProjects() {
     const user = "brennanmhr06";
     const orgs = ["fluent-lang-apps", "Guardians-Stuff"];
     const projectsList = document.getElementById("projects-list");
     if (!projectsList) return;
 
-    // Enhanced loading state
+    // Show skeleton loading cards
     projectsList.innerHTML = `
-      <div class="loading-state">
-        <div class="loading-spinner"></div>
-        <p>Loading amazing projects...</p>
+      <div class="projects-grid">
+        ${Array(6).fill('').map(() => `
+          <div class="skeleton-card">
+            <div class="skeleton-card__thumb"></div>
+            <div class="skeleton-card__body">
+              <div class="skeleton-card__title"></div>
+              <div class="skeleton-card__desc"></div>
+              <div class="skeleton-card__meta"></div>
+            </div>
+          </div>
+        `).join('')}
       </div>
     `;
 
@@ -212,63 +220,92 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadProjects();
 
-  // Magnetic cursor effect
-  function initMagneticCursor() {
-    const cursor = document.createElement('div');
-    cursor.className = 'magnetic-cursor';
-    const cursorDot = document.createElement('div');
-    cursorDot.className = 'magnetic-cursor-dot';
+  // Simplified 3D tilt effects (performance optimized)
+  function init3DTiltEffect() {
+    const tiltElements = document.querySelectorAll('.project-card');
 
-    document.body.appendChild(cursor);
-    document.body.appendChild(cursorDot);
+    tiltElements.forEach(element => {
+      element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    let cursorDotX = 0, cursorDotY = 0;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+        const rotateX = ((y - centerY) / centerY) * -10; // Reduced intensity
+        const rotateY = ((x - centerX) / centerX) * 10;  // Reduced intensity
 
-    function animateCursor() {
-      const cursorSpeed = 0.1;
-      const dotSpeed = 0.3;
-
-      cursorX += (mouseX - cursorX) * cursorSpeed;
-      cursorY += (mouseY - cursorY) * cursorSpeed;
-
-      cursorDotX += (mouseX - cursorDotX) * dotSpeed;
-      cursorDotY += (mouseY - cursorDotY) * dotSpeed;
-
-      cursor.style.transform = `translate(${cursorX - 10}px, ${cursorY - 10}px)`;
-      cursorDot.style.transform = `translate(${cursorDotX - 2}px, ${cursorDotY - 2}px)`;
-
-      requestAnimationFrame(animateCursor);
-    }
-
-    animateCursor();
-
-    // Magnetic effect on interactive elements
-    const magneticElements = document.querySelectorAll('.nav__links a, .badge, .chips li, .project-card');
-
-    magneticElements.forEach(element => {
-      element.addEventListener('mouseenter', () => {
-        cursor.style.transform += ' scale(1.5)';
-        cursorDot.style.transform += ' scale(0.5)';
+        element.style.setProperty('--tilt-x', `${rotateX}deg`);
+        element.style.setProperty('--tilt-y', `${rotateY}deg`);
       });
 
       element.addEventListener('mouseleave', () => {
-        cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
-        cursorDot.style.transform = cursorDot.style.transform.replace(' scale(0.5)', '');
+        element.style.setProperty('--tilt-x', '0deg');
+        element.style.setProperty('--tilt-y', '0deg');
       });
     });
   }
 
-  // Initialize magnetic cursor on desktop only
-  if (window.innerWidth > 768) {
-    initMagneticCursor();
-  }
+  init3DTiltEffect();
+
+  // Remove magnetic cursor effect (performance issue)
+  // function initMagneticCursor() {
+  //   const cursor = document.createElement('div');
+  //   cursor.className = 'magnetic-cursor';
+  //   const cursorDot = document.createElement('div');
+  //   cursorDot.className = 'magnetic-cursor-dot';
+  //
+  //   document.body.appendChild(cursor);
+  //   document.body.appendChild(cursorDot);
+  //
+  //   let mouseX = 0, mouseY = 0;
+  //   let cursorX = 0, cursorY = 0;
+  //   let cursorDotX = 0, cursorDotY = 0;
+  //
+  //   document.addEventListener('mousemove', (e) => {
+  //     mouseX = e.clientX;
+  //     mouseY = e.clientY;
+  //   });
+  //
+  //   function animateCursor() {
+  //     const cursorSpeed = 0.1;
+  //     const dotSpeed = 0.3;
+  //
+  //     cursorX += (mouseX - cursorX) * cursorSpeed;
+  //     cursorY += (mouseY - cursorY) * cursorSpeed;
+  //
+  //     cursorDotX += (mouseX - cursorDotX) * dotSpeed;
+  //     cursorDotY += (mouseY - cursorDotY) * dotSpeed;
+  //
+  //     cursor.style.transform = `translate(${cursorX - 10}px, ${cursorY - 10}px)`;
+  //     cursorDot.style.transform = `translate(${cursorDotX - 2}px, ${cursorDotY - 2}px)`;
+  //
+  //     requestAnimationFrame(animateCursor);
+  //   }
+  //
+  //   animateCursor();
+  //
+  //   // Magnetic effect on interactive elements
+  //   const magneticElements = document.querySelectorAll('.nav__links a, .badge, .chips li, .project-card');
+  //
+  //   magneticElements.forEach(element => {
+  //     element.addEventListener('mouseenter', () => {
+  //       cursor.style.transform += ' scale(1.5)';
+  //       cursorDot.style.transform += ' scale(0.5)';
+  //     });
+  //
+  //     element.addEventListener('mouseleave', () => {
+  //       cursor.style.transform = cursor.style.transform.replace(' scale(1.5)', '');
+  //       cursorDot.style.transform = cursorDot.style.transform.replace(' scale(0.5)', '');
+  //     });
+  //   });
+  // }
+
+  // Don't initialize magnetic cursor (performance optimization)
+  // if (window.innerWidth > 768) {
+  //   initMagneticCursor();
+  // }
 
   // Add smooth scroll behavior for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -320,6 +357,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener('scroll', requestTick);
 
+  // Simplified scroll effects (performance optimized)
+  function initPageTransitions() {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+
+    // Update scroll indicator only
+    function updateScrollIndicator() {
+      const scrolled = window.pageYOffset;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrolled / maxScroll;
+
+      if (scrollIndicator) {
+        scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollIndicator);
+
+    // Smooth page transitions for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          // Add active state to clicked link
+          document.querySelectorAll('.nav__links a').forEach(link => {
+            link.classList.remove('active');
+          });
+          this.classList.add('active');
+
+          // Smooth scroll to target
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  }
+
+  initPageTransitions();
+
   // Add mouse move effect for hero section
   const hero = document.querySelector('.hero');
   if (hero) {
@@ -343,4 +421,44 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Simplified initialization (performance optimized)
+  function initializeAllEffects() {
+    // Add loading transition
+    document.body.classList.add('loading-transition');
+    setTimeout(() => {
+      document.body.classList.add('loaded');
+    }, 100);
+
+    // Simplified 3D tilt for dynamically loaded content only
+    setTimeout(() => {
+      const newElements = document.querySelectorAll('.project-card:not(.tilt-initialized)');
+      newElements.forEach(element => {
+        element.classList.add('tilt-initialized');
+
+        element.addEventListener('mousemove', (e) => {
+          const rect = element.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -10;
+          const rotateY = ((x - centerX) / centerX) * 10;
+
+          element.style.setProperty('--tilt-x', `${rotateX}deg`);
+          element.style.setProperty('--tilt-y', `${rotateY}deg`);
+        });
+
+        element.addEventListener('mouseleave', () => {
+          element.style.setProperty('--tilt-x', '0deg');
+          element.style.setProperty('--tilt-y', '0deg');
+        });
+      });
+    }, 2000);
+  }
+
+  initializeAllEffects();
+
 });
