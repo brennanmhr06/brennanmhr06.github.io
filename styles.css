@@ -510,6 +510,9 @@ select,
   border-radius: var(--radius-full);
   letter-spacing: 0.02em;
   transition: all 0.2s var(--ease);
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  background-image: none !important;
 }
 
 .badge--pronouns {
@@ -530,6 +533,22 @@ select,
 .badge:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.3);
+  color: inherit;
+}
+
+.badge--pronouns:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.badge--pink:hover {
+  background: var(--pink);
+  color: white;
+}
+
+.badge--dev:hover {
+  background: var(--amber);
+  color: white;
 }
 
 .hero__tagline {
