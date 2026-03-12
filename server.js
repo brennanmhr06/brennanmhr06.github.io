@@ -1,4 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Theme switching functionality
+  const themeToggle = document.querySelector('.theme-toggle');
+  const themeIcon = document.querySelector('.theme-toggle__icon');
+
+  // Check for saved theme preference or default to dark mode
+  const currentTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  // Theme toggle event listener
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      // Update theme
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+  }
+
+  // Update theme icon based on current theme
+  function updateThemeIcon(theme) {
+    if (themeIcon) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+  }
+
   const yearEl = document.getElementById("year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
