@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const particlesContainer = document.getElementById("particles");
     if (!particlesContainer) return;
 
-    const particleCount = 60;
+    const particleCount = 200;
     const particleTypes = [
       'particle--small', 'particle--medium', 'particle--large',
       'particle--glow', 'particle--pulse', 'particle--cyan', 'particle--purple'
@@ -490,4 +490,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initializeAllEffects();
 
+  // Create starfield background
+  function createStarfield() {
+    const starfield = document.getElementById("starfield");
+    if (!starfield) return;
+
+    const starCount = 150;
+    
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.animationDelay = Math.random() * 3 + "s";
+      star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      starfield.appendChild(star);
+    }
+  }
+
+  // Create matrix rain effect
+  function createMatrixRain() {
+    const matrixRain = document.getElementById("matrix-rain");
+    if (!matrixRain) return;
+
+    const columnCount = 25;
+    
+    for (let i = 0; i < columnCount; i++) {
+      const column = document.createElement("div");
+      matrixRain.appendChild(column);
+    }
+  }
+
+  // Create cosmic dust
+  function createCosmicDust() {
+    const cosmicDust = document.getElementById("cosmic-dust");
+    if (!cosmicDust) return;
+
+    const dustCount = 80;
+    
+    for (let i = 0; i < dustCount; i++) {
+      const dust = document.createElement("div");
+      dust.className = "dust-particle";
+      dust.style.left = Math.random() * 100 + "%";
+      dust.style.top = Math.random() * 100 + "%";
+      dust.style.animationDelay = Math.random() * 8 + "s";
+      dust.style.animationDuration = (Math.random() * 10 + 15) + "s";
+      cosmicDust.appendChild(dust);
+    }
+  }
+
+  // Initialize all new background effects
+  function initializeNewEffects() {
+    createStarfield();
+    createMatrixRain();
+    createCosmicDust();
+  }
+
+  initializeNewEffects();
 });
