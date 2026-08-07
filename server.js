@@ -33,15 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // Enhanced floating particles with varied effects
+  // Optimized floating particles with varied effects
   function createParticles() {
     const particlesContainer = document.getElementById("particles");
     if (!particlesContainer) return;
 
-    const particleCount = 200;
+    const particleCount = 50;
     const particleTypes = [
       'particle--small', 'particle--medium', 'particle--large',
-      'particle--glow', 'particle--pulse', 'particle--cyan', 'particle--purple'
+      'particle--glow', 'particle--pulse'
     ];
 
     for (let i = 0; i < particleCount; i++) {
@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const randomType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
       particle.className = `particle ${randomType}`;
       particle.style.left = Math.random() * 100 + "%";
-      particle.style.animationDelay = Math.random() * 25 + "s";
-      particle.style.animationDuration = (12 + Math.random() * 15) + "s";
+      particle.style.animationDelay = Math.random() * 20 + "s";
+      particle.style.animationDuration = (15 + Math.random() * 10) + "s";
 
       particlesContainer.appendChild(particle);
     }
@@ -58,25 +58,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   createParticles();
 
-  // Advanced scroll animations with enhanced Intersection Observer
+  // Optimized scroll animations with Intersection Observer
   const observerOptions = {
-    threshold: [0.1, 0.3, 0.6],
-    rootMargin: "0px 0px -100px 0px",
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const ratio = entry.intersectionRatio;
         entry.target.classList.add("visible");
-        entry.target.style.setProperty('--scroll-ratio', ratio);
 
-        // Add staggered animation for child elements
+        // Add staggered animation for child elements with reduced delay
         const children = entry.target.querySelectorAll('.chips li, .project-card');
         children.forEach((child, index) => {
           setTimeout(() => {
             child.classList.add('animate-in');
-          }, index * 100);
+          }, index * 50);
         });
       }
     });
@@ -111,29 +109,29 @@ document.addEventListener("DOMContentLoaded", () => {
         if (charIndex < phrase.length) {
           typewriterEl.textContent = phrase.slice(0, charIndex + 1);
           charIndex++;
-          setTimeout(type, 50 + Math.random() * 30);
+          setTimeout(type, 40 + Math.random() * 20);
         } else {
           typing = false;
-          setTimeout(type, 2000 + Math.random() * 1000);
+          setTimeout(type, 1500 + Math.random() * 500);
         }
       } else {
         if (charIndex > 0) {
           typewriterEl.textContent = phrase.slice(0, charIndex - 1);
           charIndex--;
-          setTimeout(type, 25 + Math.random() * 15);
+          setTimeout(type, 20 + Math.random() * 10);
         } else {
           typing = true;
           phraseIndex = (phraseIndex + 1) % typewriterPhrases.length;
-          setTimeout(type, 500);
+          setTimeout(type, 300);
         }
       }
     }
 
-    // Start typewriter with delay
+    // Start typewriter with reduced delay
     setTimeout(() => {
       typewriterEl.style.borderRight = '2px solid var(--accent)';
       type();
-    }, 1000);
+    }, 500);
   }
 
   // Enhanced project loading with skeleton cards
@@ -146,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show skeleton loading cards
     projectsList.innerHTML = `
       <div class="projects-grid">
-        ${Array(6).fill('').map(() => `
+        ${Array(4).fill('').map(() => `
           <div class="skeleton-card">
             <div class="skeleton-card__thumb"></div>
             <div class="skeleton-card__body">
@@ -238,9 +236,9 @@ document.addEventListener("DOMContentLoaded", () => {
         cards.forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('animate-in');
-          }, index * 100);
+          }, index * 30);
         });
-      }, 100);
+      }, 50);
 
     } catch {
       projectsList.innerHTML = "<p>Failed to load projects from GitHub.</p>";
