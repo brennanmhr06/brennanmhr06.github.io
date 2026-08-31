@@ -1,4 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav__toggle');
+  const navLinks = document.querySelector('.nav__links');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', !isExpanded);
+      navLinks.classList.toggle('active');
+      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    });
+
+    // Close menu when clicking on a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
   // Theme switching functionality
   const themeToggle = document.querySelector('.theme-toggle');
   const themeIcon = document.querySelector('.theme-toggle__icon');
@@ -70,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entry.target.classList.add("visible");
 
         // Add staggered animation for child elements with reduced delay
-        const children = entry.target.querySelectorAll('.chips li, .project-card');
+        const children = entry.target.querySelectorAll('.chips li, .project-card, .skill-category');
         children.forEach((child, index) => {
           setTimeout(() => {
             child.classList.add('animate-in');
@@ -348,59 +379,61 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Enhanced parallax scrolling effect
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.hero::before, .grid-overlay, .bg-gradient');
+  // Combined scroll effects (performance optimized)
+  const siteHeader = document.querySelector('.site-header');
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  let ticking = false;
 
-    parallaxElements.forEach(element => {
-      const speed = element.classList.contains('hero::before') ? 0.5 : 0.2;
-      const yPos = -(scrolled * speed);
-      element.style.transform = `translateY(${yPos}px)`;
-    });
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.pageYOffset;
+
+        // Header scroll effect
+        if (siteHeader) {
+          if (scrolled > 50) {
+            siteHeader.classList.add('scrolled');
+          } else {
+            siteHeader.classList.remove('scrolled');
+          }
+        }
+
+        // Parallax scrolling effect
+        const parallaxElements = document.querySelectorAll('.hero::before, .grid-overlay, .bg-gradient');
+        parallaxElements.forEach(element => {
+          const speed = element.classList.contains('hero::before') ? 0.5 : 0.2;
+          const yPos = -(scrolled * speed);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+
+        // Hero elements parallax
+        updateParallaxElements(scrolled);
+
+        // Update scroll indicator
+        if (scrollIndicator) {
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = scrolled / maxScroll;
+          scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
+        }
+
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 
-  // Add parallax effect on scroll
-  let ticking = false;
-  function updateParallax() {
-    const scrolled = window.pageYOffset;
+  // Add parallax effect on scroll (integrated with main scroll handler)
+  function updateParallaxElements(scrolled) {
     const parallaxElements = document.querySelectorAll('.hero__avatar, .hero__name');
-
     parallaxElements.forEach((element, index) => {
       const speed = 0.5 + (index * 0.2);
       const yPos = -(scrolled * speed);
       element.style.transform = `translateY(${yPos}px)`;
     });
-
-    ticking = false;
   }
-
-  function requestTick() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }
-
-  window.addEventListener('scroll', requestTick);
 
   // Simplified scroll effects (performance optimized)
   function initPageTransitions() {
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-
-    // Update scroll indicator only
-    function updateScrollIndicator() {
-      const scrolled = window.pageYOffset;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = scrolled / maxScroll;
-
-      if (scrollIndicator) {
-        scrollIndicator.style.transform = `scaleX(${scrollPercent})`;
-      }
-    }
-
-    window.addEventListener('scroll', updateScrollIndicator);
-
     // Smooth page transitions for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {

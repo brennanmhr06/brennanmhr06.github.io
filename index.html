@@ -26,6 +26,9 @@
   <header class="site-header">
     <nav class="nav" aria-label="Main">
       <a href="#" class="nav__brand">Brennan</a>
+      <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav__toggle-icon"></span>
+      </button>
       <div class="nav__links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
@@ -73,40 +76,84 @@
     <section id="skills" class="section section--skills">
       <div class="section__inner">
         <h2 class="section__title">Skills</h2>
-        <ul class="chips" id="skills-list">
-          <li>JavaScript</li>
-          <li>TypeScript</li>
-          <li>Svelte</li>
-          <li>React</li>
-          <li>Next.js</li>
-          <li>CSS</li>
-          <li>SCSS/Sass</li>
-          <li>Node.js</li>
-          <li>Express.js</li>
-          <li>Python</li>
-          <li>FastAPI</li>
-          <li>Django</li>
-          <li>Rust</li>
-          <li>Elixir</li>
-          <li>Phoenix</li>
-          <li>Go</li>
-          <li>C</li>
-          <li>C++</li>
-          <li>Lua</li>
-          <li>Shell</li>
-          <li>HTML</li>
-          <li>PHP</li>
-          <li>Laravel</li>
-          <li>SQL</li>
-          <li>PostgreSQL</li>
-          <li>MongoDB</li>
-          <li>GraphQL</li>
-          <li>Docker</li>
-          <li>Git</li>
-          <li>CI/CD</li>
-          <li>Linux</li>
-          <li>AWS</li>
-        </ul>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 class="skill-category__title">
+              <span class="skill-category__icon">🎨</span>
+              Frontend
+            </h3>
+            <ul class="chips">
+              <li>JavaScript</li>
+              <li>TypeScript</li>
+              <li>React</li>
+              <li>Next.js</li>
+              <li>Svelte</li>
+              <li>CSS</li>
+              <li>SCSS/Sass</li>
+              <li>HTML</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category__title">
+              <span class="skill-category__icon">⚙️</span>
+              Backend
+            </h3>
+            <ul class="chips">
+              <li>Node.js</li>
+              <li>Express.js</li>
+              <li>Python</li>
+              <li>FastAPI</li>
+              <li>Django</li>
+              <li>PHP</li>
+              <li>Laravel</li>
+              <li>GraphQL</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category__title">
+              <span class="skill-category__icon">💻</span>
+              Languages
+            </h3>
+            <ul class="chips">
+              <li>Rust</li>
+              <li>Elixir</li>
+              <li>Phoenix</li>
+              <li>Go</li>
+              <li>C</li>
+              <li>C++</li>
+              <li>Lua</li>
+              <li>Shell</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category__title">
+              <span class="skill-category__icon">🗄️</span>
+              Database
+            </h3>
+            <ul class="chips">
+              <li>SQL</li>
+              <li>PostgreSQL</li>
+              <li>MongoDB</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3 class="skill-category__title">
+              <span class="skill-category__icon">🚀</span>
+              DevOps
+            </h3>
+            <ul class="chips">
+              <li>Docker</li>
+              <li>Git</li>
+              <li>CI/CD</li>
+              <li>Linux</li>
+              <li>AWS</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
