@@ -100,12 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
 
-        // Add staggered animation for child elements with reduced delay
-        const children = entry.target.querySelectorAll('.chips li, .project-card, .skill-category');
+        // Add staggered animation for child elements
+        const children = entry.target.querySelectorAll('.project-card, .skill-category');
         children.forEach((child, index) => {
           setTimeout(() => {
             child.classList.add('animate-in');
-          }, index * 50);
+          }, index * 100);
         });
       }
     });
@@ -291,8 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -10; // Reduced intensity
-        const rotateY = ((x - centerX) / centerX) * 10;  // Reduced intensity
+        const rotateX = ((y - centerY) / centerY) * -5; // Further reduced intensity
+        const rotateY = ((x - centerX) / centerX) * 5;  // Further reduced intensity
 
         element.style.setProperty('--tilt-x', `${rotateX}deg`);
         element.style.setProperty('--tilt-y', `${rotateY}deg`);
@@ -504,8 +504,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
 
-          const rotateX = ((y - centerY) / centerY) * -10;
-          const rotateY = ((x - centerX) / centerX) * 10;
+          const rotateX = ((y - centerY) / centerY) * -5;
+          const rotateY = ((x - centerX) / centerX) * 5;
 
           element.style.setProperty('--tilt-x', `${rotateX}deg`);
           element.style.setProperty('--tilt-y', `${rotateY}deg`);
