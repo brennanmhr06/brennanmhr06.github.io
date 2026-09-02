@@ -420,6 +420,35 @@ select,
   cursor: pointer;
 }
 
+/* Custom white dot cursor */
+.custom-cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease-out;
+}
+
+/* Hide default cursor on body */
+body {
+  cursor: none;
+}
+
+/* Show default cursor on interactive elements */
+a,
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  cursor: auto;
+}
+
 /* Prevent text cursor on typewriter element */
 #typewriter {
   user-select: none;
